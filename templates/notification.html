@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div style="margin-left: 300px;">
+    <h6 class="header">NOTIFICATION TWEETS</h6>
+{% for notice in has_readed_notices%}
+<div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel aqua">
+        <span class="black-text">
+            <a href=""> {{ notice }}
+        </span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{%endblock%}

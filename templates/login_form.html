@@ -1,0 +1,6 @@
+<h3>This page is for authorized user.</h3>
+<br />
+<form method="POST" action="/login/">
+  {%csrf_token%} {{form.as_p}}
+  <input type="submit" value="Login" />
+</form>

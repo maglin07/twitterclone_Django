@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>TwitterClone App</title>
+</head>
+<body>
+{% block content %}
+
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">TwitterClone</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"></i></a>
+          </ul>
+        </div>
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="">Home</a></li>
+            <li class="tab"><a class="active" href="/tweet/">Tweet</a></li>
+            <li class="tab"><a href="/profile/{{user.id}}/">Profile</a></li>
+            <li class="tab"><a href="/notifications/">Notifications</a></li>
+            <li class="tab"><a href="/login/">Login</a></li>
+            <li class="tab"><a href="/register/">Register</a></li>
+            <li class="tab"><a href="/logout/">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+
+{% if request.user.is_authenticated %}
+<div class="col s12 m7" >
+    <h4 class="header">Welcome {{ request.user.get_username}} :)  Thanks for logging in.</h4>
+    <div class="card horizontal">
+      <div class="card-stacked">
+        <div class="card-content" style="margin-left: 50px;">
+            <h6>Following: {{ request.user.friends.count }}</h6>
+            <h6>Tweets: {{ total_tweets }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<br>
+
+
+<div style="margin-left: 300px;">
+{% for tweet in tweets%}
+
+<div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel aqua">
+        <span class="black-text"><a href="/profile/{{tweet.twitter.id}}">@{{ tweet.twitter}}</a>
+        </span>
+        <span>{{ tweet.date}}</span>
+        <div >
+        <span> <a href="/tweet/{{tweet.id}}"> {{ tweet.text}}</a></span>
+
+    </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+
+<br>
+{% endblock %}
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+document.getElementById('follow').onclick = changeColor; 
+
+function changeColor() {
+    document.getElementById('follow').style.backgroundColor = "orange";
+    return false;
+}
+</script>
+</body>
+</html>
